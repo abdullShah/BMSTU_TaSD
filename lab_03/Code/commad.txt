@@ -1,0 +1,1 @@
+/clean.sh; clear;./build_debug.sh; valgrind -s --leak-check=yes ./app.exe data/file_1.txt data/file_2.txt
