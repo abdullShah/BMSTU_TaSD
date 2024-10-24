@@ -1,0 +1,323 @@
+Armstrong
+Moon
+New Times
+123
+1
+0
+Popov
+Electron
+True Russia
+450
+0
+Electrical
+1
+1985
+Pushkin
+Fish
+Gold History
+5
+2
+99
+1
+Johnson
+Mars
+Tech Press
+300
+0
+Mechanical
+0
+1990
+Johnson
+Sun
+Global
+150
+1
+0
+Brown
+Industrial
+Engine Press
+320
+0
+Engineering
+0
+1995
+Anderson
+Blue Sky
+Writers House
+200
+2
+5
+0
+Smith
+World in Code
+Tech Future
+500
+0
+Programming
+1
+2001
+Smith
+Creative
+Art World
+180
+1
+3
+Brown
+Imaginary
+Youth Reads
+60
+2
+7
+1
+Taylor
+Rocket
+Space
+400
+0
+Aerospace
+1
+1980
+Taylor
+Stage Dreams
+Performers
+120
+1
+1
+Davis
+Computing
+Binary Books
+550
+0
+Computing
+1
+2010
+Miller
+Digital Future
+Innovation
+350
+0
+Electrical
+0
+2005
+Davis
+Adventures
+Fantasy
+90
+2
+10
+0
+Miller
+Dream Worlds
+Visionary
+220
+1
+0
+Wilson
+AI Revolution
+Tech Hub
+480
+0
+Artificial
+1
+2020
+Wilson
+Magical Tales
+Childhood
+80
+2
+8
+0
+Popovich
+Electron
+True City
+330
+0
+Bilding
+1
+1977
+Ivanov
+Electry
+City New
+401
+0
+Electrical
+1
+1980
+White
+Green Energy
+Eco Books
+300
+0
+Energy
+1
+2015
+White
+Green Energy
+Eco Books
+300
+0
+Renewable
+1
+2015
+White
+Stories Stars
+Fantasy Reads
+70
+2
+12
+1
+Lewis
+Quantum Leap
+Science
+370
+0
+Physics
+0
+2002
+Lewis
+The Art
+Creative Minds
+140
+1
+1
+Clark
+Future Cities
+Urban Press
+320
+0
+Architecture
+1
+1998
+Clark
+Mythical
+Adventure
+110
+2
+9
+1
+Walker
+Code
+Tech Today
+410
+0
+Programming
+0
+2008
+Walker
+Epic Tales
+HeroicPress
+130
+2
+11
+0
+Armstrong
+Sun
+New Times
+133
+1
+0
+Armstrong
+Mars
+City New
+100
+1
+0
+White
+Stories
+Fantasy Reads
+70
+2
+12
+1
+Lewis
+Quantum Leap
+Science
+370
+0
+Physics
+0
+2002
+Lewis
+Sculpture
+Minds
+140
+1
+0
+Clark
+Future City
+Urban Press
+320
+0
+Architecture
+1
+1998
+Kovalev
+Robotics
+Future Tech
+450
+0
+Robotics
+1
+2022
+Kovalev
+Short Stories
+Literary
+250
+1
+0
+Petrov
+The Last
+Space
+300
+0
+Astrophysics
+0
+2019
+Petrov
+Tales of Old
+Folklore
+90
+2
+5
+1
+Sidorov
+Mathematics
+Math House
+600
+0
+Mathematics
+1
+2018
+Sidorov
+Theater
+Cultural
+130
+1
+1
+Armstrong
+Hello
+New City
+241
+1
+0
+Clark
+Mythical
+Adventure
+110
+2
+9
+1
+Walker
+Tomorrow
+Tech Today
+410
+0
+Programming
+0
+2008
+Armstrong
+Cars
+Future
+352
+1
+0
