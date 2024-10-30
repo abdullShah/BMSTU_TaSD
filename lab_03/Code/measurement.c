@@ -6,24 +6,32 @@
 #include "measurement.h"
 
 #define RAND_LIMIT 100
-#define CNT_ITER 500
+#define CNT_ITER 25
 
-extern int clock_gettime (clock_t __clock_id, struct timespec *__tp) __THROW;
+extern int clock_gettime(clock_t __clock_id, struct timespec *__tp) __THROW;
 
 static void fill_standard_matrix(int **matrix, int n, int m, int filling)
 {
     srand(time(NULL));
 
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < m; j++)
-        {
-            int random_chance = rand() % 100;
+    filling = 100 - filling;
 
-            if (random_chance < filling)
-                matrix[i][j] = rand() % (RAND_LIMIT + 1);
-            else
-                matrix[i][j] = 0;
+    size_t zeros_needed = (n * m * filling) / 100;
+
+    for (size_t i = 0; i < (size_t) n; i++)
+        for (size_t j = 0; j < (size_t) m; j++)
+            matrix[i][j] = rand() % (RAND_LIMIT + 1);
+
+    while (zeros_needed > 0)
+    {
+        size_t i = rand() % n;
+        size_t j = rand() % m;
+        if (matrix[i][j] != 0)
+        {
+            matrix[i][j] = 0;
+            zeros_needed--;
         }
+    }
 }
 
 int compare_matrix_operations(void)
@@ -102,7 +110,14 @@ int compare_matrix_operations(void)
             int sparse_time = (int) ((end.tv_sec - start.tv_sec) * 1e9 + (end.tv_nsec - start.tv_nsec));
             sparse_time_total += sparse_time;
 
-            sparse_memory = sizeof(int) * sp_matr_1.A_len;
+            sparse_memory = sp_matr_1.A_len * sizeof(int) * 2;
+            sparse_memory += sp_matr_1.JA_len * sizeof(int);
+
+            /*printf("==========\n");
+            print_matrix(st_matr_1);
+            printf("==========\n");
+            print_matrix(st_matr_2);
+            printf("==========\n");*/
 
             free_matrixes(st_matr_1, sp_matr_1);
             free_matrixes(st_matr_2, sp_matr_2);
@@ -114,11 +129,10 @@ int compare_matrix_operations(void)
         int avg_standard_time = standard_time_total / CNT_ITER;
         int avg_sparse_time = sparse_time_total / CNT_ITER;
 
-        printf("%-21d|%-11d|%-11d|%-11zu|%-11zu|\n",
-               filling, avg_sparse_time, avg_standard_time, sparse_memory, standard_memory);
+        printf("%-21d|%-11d|%-11d|%-11zu|%-11zu|\n", filling, avg_sparse_time, avg_standard_time, sparse_memory,
+               standard_memory);
     }
 
     printf("\n");
     return PROCESS_DONE;
 }
-
