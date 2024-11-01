@@ -50,13 +50,13 @@ int compare_matrix_operations(void)
     printf("Процент заполнения, %%|разреженная|стандартная|разреженная|стандартная|\n");
     printf("---------------------+-----------+-----------+-----------+-----------|\n");
 
-    for (int filling = 10; filling <= 100; filling += 20)
+    int fillingses[] = {10 , 30, 43, 50, 70, 100};
+    int c = 6;
+    for (int z = 0; z < c; z++)
     {
-        if (filling == 90)
-            filling = 100;
-
+        int filling = fillingses[z];
         size_t sparse_memory = 0;
-        size_t standard_memory = sizeof(int) * n * m;
+        size_t standard_memory = sizeof(int) * n * m * 3;
         int sparse_time_total = 0;
         int standard_time_total = 0;
 
@@ -110,13 +110,19 @@ int compare_matrix_operations(void)
             int sparse_time = (int) ((end.tv_sec - start.tv_sec) * 1e9 + (end.tv_nsec - start.tv_nsec));
             sparse_time_total += sparse_time;
 
-            sparse_memory = sp_matr_1.A_len * sizeof(int) * 2;
+            sparse_memory = sp_matr_3.A_len * sizeof(int) * 2;
+            sparse_memory += sp_matr_3.JA_len * sizeof(int);
+            sparse_memory += sp_matr_1.A_len * sizeof(int) * 2;
             sparse_memory += sp_matr_1.JA_len * sizeof(int);
+            sparse_memory += sp_matr_2.A_len * sizeof(int) * 2;
+            sparse_memory += sp_matr_2.JA_len * sizeof(int);
 
-            /*printf("==========\n");
+            /*rintf("==========\n");
             print_matrix(st_matr_1);
             printf("==========\n");
             print_matrix(st_matr_2);
+            printf("==========\n");
+            print_matrix(st_matr_3);
             printf("==========\n");*/
 
             free_matrixes(st_matr_1, sp_matr_1);
