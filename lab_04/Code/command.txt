@@ -1,0 +1,1 @@
+/clean.sh; clear;./build_debug.sh; valgrind -s --leak-check=yes ./app.exe
