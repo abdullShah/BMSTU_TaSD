@@ -1,0 +1,1 @@
+bash ./clean.sh; clear; bash ./build_debug.sh; valgrind -s --leak-check=yes ./app.exe data/nums.txt
