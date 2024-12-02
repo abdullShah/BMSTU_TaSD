@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 
     Node *rootTree = NULL;
     AVLNode *rootAVLTree = NULL;
-    HashTable *hashTable = createHashTable();
+    HashTable *hashTable = createHashTable(1);
 
     int choice = 1;
     int attempt = 1;

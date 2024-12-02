@@ -57,7 +57,7 @@ void measureAverageFindTime(int attempt)
     FILE *table_file = fopen(table_filename, "w");
     if (!table_file)
     {
-        printf("Ошибка: не удалось открыть файл для записи для таблицы!\n\n");
+        printf("Ошибка: не удалось открыть файл для записи для таблицы [создать папку ./measure]!\n\n");
         return;
     }
 
@@ -75,14 +75,13 @@ void measureAverageFindTime(int attempt)
 
         double totalTimeTree = 0.0, totalTimeAVLTree = 0.0, totalTimeHashTable = 0.0;
         int cmpCntTree = 0, cmpCntAVLTree = 0, cmpCntHashTable = 0;
-        int memoryTree = 0, memoryAVLTree = 0, memoryHashTable = 0;
 
         char filename_in[64];
         snprintf(filename_in, sizeof(filename_in), "./trees/level_%d.txt", level);
 
         Node *rootTree = NULL;
         AVLNode *rootAVLTree = NULL;
-        HashTable *hashTable = createHashTable();
+        HashTable *hashTable = createHashTable(1);
 
         if (readTreeByFile(filename_in, &rootTree) || readAVLTreeByFile(filename_in, &rootAVLTree) ||
             readHashTableByFile(filename_in, hashTable))
@@ -125,19 +124,23 @@ void measureAverageFindTime(int attempt)
         double avgTimeAVLTree = totalTimeAVLTree / MAX_ITER;
         double avgTimeHashTable = totalTimeHashTable / MAX_ITER;
 
-        memoryTree = getTreeMemory(rootTree);
-        memoryAVLTree = getAVLTreeMemory(rootAVLTree);
-        memoryHashTable = getHashTableMemory(hashTable);
+        int avgCmpCntTree = (int) floor(cmpCntTree / MAX_ITER);
+        int avgCmpCntAVLTree = (int) floor(cmpCntAVLTree / MAX_ITER);
+        int avgCmpCntHashTable = (int) floor(cmpCntHashTable / MAX_ITER);
 
-        printf("| Дерево              | %-19.2f | %-19d | %-19d |\n", avgTimeTree, cmpCntTree, memoryTree);
-        printf("| Сбаланс. дерево     | %-19.2f | %-19d | %-19d |\n", avgTimeAVLTree, cmpCntAVLTree, memoryAVLTree);
-        printf("| Хеш-таблица         | %-19.2f | %-19d | %-19d |\n", avgTimeHashTable, cmpCntHashTable,
+        size_t memoryTree = getTreeMemory(rootTree);
+        size_t memoryAVLTree = getAVLTreeMemory(rootAVLTree);
+        size_t memoryHashTable = getHashTableMemory(hashTable);
+
+        printf("| Дерево              | %-19.2f | %-19d | %-19zu |\n", avgTimeTree, avgCmpCntTree, memoryTree);
+        printf("| Сбаланс. дерево     | %-19.2f | %-19d | %-19zu |\n", avgTimeAVLTree, avgCmpCntAVLTree, memoryAVLTree);
+        printf("| Хеш-таблица         | %-19.2f | %-19d | %-19zu |\n", avgTimeHashTable, avgCmpCntHashTable,
                memoryHashTable);
         printf("+---------------------+---------------------+---------------------+---------------------+\n");
 
-        fprintf(table_file, "Дерево\t%.2f\t%d\t%d\n", avgTimeTree, cmpCntTree, memoryTree);
-        fprintf(table_file, "Сбаланс. дерево\t%.2f\t%d\t%d\n", avgTimeAVLTree, cmpCntAVLTree, memoryAVLTree);
-        fprintf(table_file, "Хеш-таблица\t%.2f\t%d\t%d\n\n", avgTimeHashTable, cmpCntHashTable, memoryHashTable);
+        fprintf(table_file, "Дерево\t%.2f\t%d\t%zu\n", avgTimeTree, avgCmpCntTree, memoryTree);
+        fprintf(table_file, "Сбаланс. дерево\t%.2f\t%d\t%zu\n", avgTimeAVLTree, avgCmpCntAVLTree, memoryAVLTree);
+        fprintf(table_file, "Хеш-таблица\t%.2f\t%d\t%zu\n\n", avgTimeHashTable, avgCmpCntHashTable, memoryHashTable);
 
         cleanup(&rootTree, &rootAVLTree, &hashTable);
     }

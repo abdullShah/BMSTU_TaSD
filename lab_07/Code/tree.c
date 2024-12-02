@@ -154,11 +154,10 @@ int readTreeByFile(char *filename, Node **root)
     return 0;
 }
 
-int getTreeMemory(Node *root)
+size_t getTreeMemory(Node *root)
 {
     if (!root)
         return 0;
 
-    return sizeof(root->value) + sizeof(root->left) + sizeof(root->right) + getTreeMemory(root->left) +
-           getTreeMemory(root->right);
+    return sizeof(int) + sizeof(Node) + sizeof(Node) + getTreeMemory(root->left) + getTreeMemory(root->right);
 }

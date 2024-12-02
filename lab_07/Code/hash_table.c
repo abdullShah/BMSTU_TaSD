@@ -2,32 +2,58 @@
 #include <stdio.h>
 #include "hash_table.h"
 
-#define INIT_SIZE 1
-#define ALLOC_STEP 2
+// #define INIT_SIZE 1
+// #define ALLOC_STEP 2
 
 static unsigned int hash(int value, size_t size)
 {
     return abs(value) % size;
 }
 
-HashTable *createHashTable(void)
+static int is_prime(int n)
 {
+    if (n <= 1)
+        return 0;
+
+    for (int i = 2; i * i <= n; i++)
+
+        if (n % i == 0)
+            return 0;
+
+    return 1;
+}
+
+static int next_prime(int n)
+{
+    n++;
+    while (!is_prime(n))
+        n++;
+
+    return n;
+}
+
+HashTable *createHashTable(size_t init_size)
+{
+    size_t prime_size = next_prime(init_size);
     HashTable *table = (HashTable *) malloc(sizeof(HashTable));
     if (!table)
         return ALLOC_ERR_HT;
 
-    table->size = INIT_SIZE;
+    table->size = prime_size;
     table->count = 0;
     table->buckets = (HashTableNode **) calloc(table->size, sizeof(HashTableNode *));
     if (!table->buckets)
+    {
+        free(table);
         return ALLOC_ERR_HT;
+    }
 
     return table;
 }
 
 static int resizeHashTable(HashTable *table)
 {
-    size_t new_size = table->size * ALLOC_STEP;
+    size_t new_size = next_prime(table->size * 2);
     HashTableNode **new_buckets = (HashTableNode **) calloc(new_size, sizeof(HashTableNode *));
     if (!new_buckets)
         return 1;
@@ -54,11 +80,23 @@ static int resizeHashTable(HashTable *table)
 
 int insertInHashTable(HashTable *table, int value)
 {
-    if (table->count >= table->size)
-        if (!resizeHashTable(table))
-            return ALLOC_ERR_HT;
-
     unsigned int index = hash(value, table->size);
+    HashTableNode *current = table->buckets[index];
+    size_t chain_length = 0;
+
+    while (current)
+    {
+        chain_length++;
+        current = current->next;
+    }
+
+    if (chain_length >= 3)
+    {
+        if (resizeHashTable(table) != 0)
+            return ALLOC_ERR_HT;
+        index = hash(value, table->size);
+    }
+
     HashTableNode *new_node = (HashTableNode *) malloc(sizeof(HashTableNode));
     if (!new_node)
         return ALLOC_ERR_HT;
@@ -178,12 +216,14 @@ int readHashTableByFile(char *filename, HashTable *table)
     return 0;
 }
 
-int getHashTableMemory(HashTable *table)
+size_t getHashTableMemory(HashTable *table)
 {
     if (!table)
         return 0;
 
-    int memory = table->size * sizeof(HashTableNode) + sizeof(table->size) + sizeof(table->count);
+    // size_t memory = sizeof(HashTable) + table->size * sizeof(HashTableNode *);
+
+    size_t memory = table->size * sizeof(HashTableNode) + sizeof(table->size) + sizeof(table->count);
 
     for (size_t i = 0; i < table->size; i++)
     {

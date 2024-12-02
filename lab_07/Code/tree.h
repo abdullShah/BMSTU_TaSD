@@ -28,6 +28,6 @@ void printTree(Node *root, size_t space, char dir);
 
 int readTreeByFile(char *filename, Node **root);
 
-int getTreeMemory(Node *root);
+size_t getTreeMemory(Node *root);
 
 #endif

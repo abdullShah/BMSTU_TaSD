@@ -244,11 +244,11 @@ int readAVLTreeByFile(char *filename, AVLNode **root)
     return 0;
 }
 
-int getAVLTreeMemory(AVLNode *root)
+size_t getAVLTreeMemory(AVLNode *root)
 {
     if (!root)
         return 0;
 
-    return sizeof(root->height) + sizeof(root->value) + sizeof(root->left) + sizeof(root->right) +
-           getAVLTreeMemory(root->left) + getAVLTreeMemory(root->right);
+    return sizeof(int) + sizeof(int) + sizeof(AVLNode) + sizeof(AVLNode) + getAVLTreeMemory(root->left) +
+           getAVLTreeMemory(root->right);
 }

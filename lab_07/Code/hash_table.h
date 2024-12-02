@@ -22,7 +22,7 @@ typedef struct HashTable
     size_t count;
 } HashTable;
 
-HashTable *createHashTable(void);
+HashTable *createHashTable(size_t init_size);
 
 int insertInHashTable(HashTable *table, int value);
 
@@ -36,6 +36,6 @@ void printHashTable(HashTable *table);
 
 int readHashTableByFile(char *filename, HashTable *table);
 
-int getHashTableMemory(HashTable *table);
+size_t getHashTableMemory(HashTable *table);
 
 #endif

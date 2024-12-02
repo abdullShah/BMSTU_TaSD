@@ -29,6 +29,6 @@ void printAVLTree(AVLNode *root, size_t n, char dir);
 
 int readAVLTreeByFile(char *filename, AVLNode **root);
 
-int getAVLTreeMemory(AVLNode *root);
+size_t getAVLTreeMemory(AVLNode *root);
 
 #endif
