@@ -53,7 +53,7 @@ HashTable *createHashTable(size_t init_size)
 
 static int resizeHashTable(HashTable *table)
 {
-    size_t new_size = next_prime(table->size * 2);
+    size_t new_size = next_prime(table->size);
     HashTableNode **new_buckets = (HashTableNode **) calloc(new_size, sizeof(HashTableNode *));
     if (!new_buckets)
         return 1;

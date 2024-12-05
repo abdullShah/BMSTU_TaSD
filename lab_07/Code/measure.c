@@ -65,12 +65,12 @@ void measureAverageFindTime(int attempt)
     {
         int level = levels[i];
 
-        printf("\n\nКоличество уровней: %d\n", level);
+        printf("\n\nКоличество элементов: %d\n", (int) (pow(2, level)));
         printf("+---------------------+---------------------+---------------------+---------------------+\n");
         printf("|                     | Время поиска (нс)   | Кол. сравнений      | Память (байт)       |\n");
         printf("+---------------------+---------------------+---------------------+---------------------+\n");
 
-        fprintf(table_file, "Количество уровней: %d\n", level);
+        fprintf(table_file, "Количество элементов: %d\n", (int) (pow(2, level)));
         fprintf(table_file, "\tВремя поиска (нс)\tКол. сравнений\tПамять (байт)\n");
 
         double totalTimeTree = 0.0, totalTimeAVLTree = 0.0, totalTimeHashTable = 0.0;
