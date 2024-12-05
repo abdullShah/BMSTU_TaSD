@@ -63,20 +63,14 @@ void queue_dyn_arr_push(queue_dyn_arr_t *queue, int value)
     queue->tail = (queue->tail + 1) % queue->capacity;
     queue->data[queue->tail] = value;
     queue->size++;
-    printf("Элемент %d добавлен в очередь.\n\n", value);
 }
 
-void queue_dyn_arr_pop(queue_dyn_arr_t *queue)
+int queue_dyn_arr_pop(queue_dyn_arr_t *queue)
 {
-    if (queue_dyn_arr_is_empty(queue))
-    {
-        printf("Очередь пуста!\n\n");
-        return;
-    }
     int value = queue->data[queue->head];
     queue->head = (queue->head + 1) % queue->capacity;
     queue->size--;
-    printf("Элемент %d удалён из очереди.\n\n", value);
+    return value;
 }
 
 void queue_dyn_arr_print(const queue_dyn_arr_t *queue)
@@ -94,4 +88,10 @@ void queue_dyn_arr_print(const queue_dyn_arr_t *queue)
         printf("%d ", queue->data[idx]);
     }
     printf("\t-->\n\n");
+}
+
+size_t queue_dyn_arr_memory(queue_dyn_arr_t *q)
+{
+    // Память под данные (динамический массив) + память под метаданные
+    return (q->capacity * sizeof(int)) + sizeof(q->capacity) + sizeof(q->size) + sizeof(q->head) + sizeof(q->tail);
 }

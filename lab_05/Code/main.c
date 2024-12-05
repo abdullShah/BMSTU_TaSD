@@ -8,6 +8,7 @@
 #include "queue_arr.h"
 #include "queue_list.h"
 #include "queue_dyn_arr.h"
+#include "measure.h"
 
 enum errors
 {
@@ -64,10 +65,21 @@ int main(void)
                     printf("Ошибка ввода числа для добавления!\n\n");
                     return INPUT_FOR_INSERT_ERR;
                 }
+                if (queue_arr_is_full(&q_arr))
+                {
+                    printf("Очередь заполнена!\n\n");
+                    break;
+                }
                 queue_arr_push(&q_arr, numberToAdd);
+                printf("Элемент %d добавлен в очередь.\n\n", numberToAdd);
                 break;
             case 2:
-                queue_arr_pop(&q_arr);
+                if (queue_arr_is_empty(&q_arr))
+                {
+                    printf("Очередь пуста!\n\n");
+                    break;
+                }
+                printf("Элемент %d удалён из очереди.\n\n", queue_arr_pop(&q_arr));
                 break;
             case 3:
                 queue_arr_print(&q_arr);
@@ -80,9 +92,15 @@ int main(void)
                     return INPUT_FOR_INSERT_ERR;
                 }
                 queue_dyn_arr_push(&q_dyn_arr, numberToAdd);
+                printf("Элемент %d добавлен в очередь.\n\n", numberToAdd);
                 break;
             case 5:
-                queue_dyn_arr_pop(&q_dyn_arr);
+                if (queue_dyn_arr_is_empty(&q_dyn_arr))
+                {
+                    printf("Очередь пуста!\n\n");
+                    break;
+                }
+                printf("Элемент %d удалён из очереди.\n\n", queue_dyn_arr_pop(&q_dyn_arr));
                 break;
             case 6:
                 queue_dyn_arr_print(&q_dyn_arr);
@@ -95,9 +113,15 @@ int main(void)
                     return INPUT_FOR_INSERT_ERR;
                 }
                 queue_list_push(&q_list, numberToAdd);
+                printf("Элемент %d добавлен в очередь.\n\n", numberToAdd);
                 break;
             case 8:
-                queue_list_pop(&q_list);
+                if (queue_list_is_empty(&q_list))
+                {
+                    printf("Очередь пуста!\n\n");
+                    break;
+                }
+                printf("Элемент %d удалён из очереди.\n\n", queue_list_pop(&q_list));
                 break;
             case 9:
                 queue_list_print(&q_list);
@@ -152,6 +176,11 @@ int main(void)
                         printf("Такого интервала нет!\n\n");
                         break;
                     }
+                    if (l >= r)
+                    {
+                        printf("Левый интервал больше или равен правого!\n\n");
+                        break;
+                    }
                     switch (c)
                     {
                         case 1:
@@ -181,7 +210,8 @@ int main(void)
                 }
                 break;
             case 13:
-                memory_io();
+                // memory_io();
+                measureQueue();
                 break;
             default:
                 puts("Нет такой команды! Повторите попытку\n");

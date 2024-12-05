@@ -1,7 +1,7 @@
 #ifndef QUEUE_ARR_H__
 #define QUEUE_ARR_H__
 
-#define MAX_QUEUE_SIZE 100
+#define MAX_QUEUE_SIZE 1000
 
 typedef struct
 {
@@ -19,8 +19,10 @@ int queue_arr_is_full(queue_arr_t *q);
 
 void queue_arr_push(queue_arr_t *q, int value);
 
-void queue_arr_pop(queue_arr_t *q);
+int queue_arr_pop(queue_arr_t *q);
 
 void queue_arr_print(queue_arr_t *q);
+
+size_t queue_arr_memory(queue_arr_t *q);
 
 #endif

@@ -21,28 +21,17 @@ int queue_arr_is_full(queue_arr_t *q)
 
 void queue_arr_push(queue_arr_t *q, int value)
 {
-    if (queue_arr_is_full(q))
-    {
-        printf("Очередь заполнена!\n\n");
-        return;
-    }
     q->tail = (q->tail + 1) % MAX_QUEUE_SIZE;  // Циклический переход
     q->data[q->tail] = value;
     q->size++;
-    printf("Элемент %d добавлен в очередь.\n\n", value);
 }
 
-void queue_arr_pop(queue_arr_t *q)
+int queue_arr_pop(queue_arr_t *q)
 {
-    if (queue_arr_is_empty(q))
-    {
-        printf("Очередь пуста!\n\n");
-        return;
-    }
     int value = q->data[q->head];
     q->head = (q->head + 1) % MAX_QUEUE_SIZE;  // Циклический переход
     q->size--;
-    printf("Элемент %d удалён из очереди.\n\n", value);
+    return value;
 }
 
 void queue_arr_print(queue_arr_t *q)
@@ -60,4 +49,10 @@ void queue_arr_print(queue_arr_t *q)
         printf("%d ", q->data[idx]);
     }
     printf("\t-->\n\n");
+}
+
+size_t queue_arr_memory(queue_arr_t *q)
+{
+    // Размер массива + размер метаданных (голова, хвост, размер)
+    return sizeof(q->data) + sizeof(q->head) + sizeof(q->tail) + sizeof(q->size);
 }

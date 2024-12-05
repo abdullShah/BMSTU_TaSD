@@ -282,7 +282,7 @@ void sd_array(int n, int interval, times_t t1, times_t t2, times_t t3, times_t t
     printf("Число вошедших во 2 очередь: %d\n", reqin2);
     printf("Число вышедших из 2 очереди: %d\n", reqout2);
     // printf("Число выброшенных заявок из 2 очереди: %d\n", out_queue2);
-    printf("Время работы (мкс): %d\n\n", timerealall);
+    printf("Время работы (тики): %d\n\n", timerealall);
 
     if (fabs(wait_in1 - 0) > EPS)
     {
@@ -304,7 +304,7 @@ void sd_array(int n, int interval, times_t t1, times_t t2, times_t t3, times_t t
         printf("Погрешность ввода 2 очереди: 0\n");
     }
 
-    printf("Время простоя ОА: %lf\n\n", fabs(timewithoutwork));
+    printf("Время простоя ОА (в усл. ед. в.): %lf\n\n", fabs(timewithoutwork));
 
     free(quearr1);
     free(quearr2);

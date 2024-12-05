@@ -20,8 +20,10 @@ int queue_dyn_arr_is_full(const queue_dyn_arr_t *queue);
 
 void queue_dyn_arr_push(queue_dyn_arr_t *queue, int value);
 
-void queue_dyn_arr_pop(queue_dyn_arr_t *queue);
+int queue_dyn_arr_pop(queue_dyn_arr_t *queue);
 
 void queue_dyn_arr_print(const queue_dyn_arr_t *queue);
+
+size_t queue_dyn_arr_memory(queue_dyn_arr_t *q);
 
 #endif

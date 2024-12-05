@@ -351,15 +351,15 @@ void sd_list(int n, int interval, times_t t1, times_t t2, times_t t3, times_t t4
         printf("Погрешность времени моделирования: 0\n\n");
     }
 
+    printf("Среднее время обработки заявки 1 очереди: %lf\n", avetime_in1);
+    printf("Среднее время обработки заявки 2 очереди: %lf\n", avetime_in2);
+
     printf("Число вошедших в 1 очередь: %d\n", reqin1);
     printf("Число вышедших из 1 очереди: %d\n", reqout1);
     printf("Число вошедших во 2 очередь: %d\n", reqin2);
     printf("Число вышедших из 2 очереди: %d\n", reqout2);
     // printf("Число выброшенных заявок из 2 очереди: %d\n", out_queue2);
-    printf("Время работы (мкс): %d\n", timerealall);
-
-    printf("Среднее время обработки заявки 1 очереди: %lf\n", avetime_in1);
-    printf("Среднее время обработки заявки 2 очереди: %lf\n", avetime_in2);
+    printf("Время работы (тики): %d\n\n", timerealall);
 
     if (fabs(wait_in1 - 0) > EPS)
     {

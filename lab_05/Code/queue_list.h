@@ -19,10 +19,12 @@ int queue_list_is_empty(queue_list_t *queue);
 
 void queue_list_push(queue_list_t *queue, int value);
 
-void queue_list_pop(queue_list_t *queue);
+int queue_list_pop(queue_list_t *queue);
 
 void queue_list_print(queue_list_t *queue);
 
 void queue_list_free(queue_list_t *queue);
+
+size_t queue_list_memory(queue_list_t *q);
 
 #endif

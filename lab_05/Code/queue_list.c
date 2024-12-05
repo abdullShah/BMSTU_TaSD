@@ -31,17 +31,10 @@ void queue_list_push(queue_list_t *queue, int value)
         queue->tail->next = new_node;
 
     queue->tail = new_node;
-    printf("Элемент %d добавлен в очередь.\n\n", value);
 }
 
-void queue_list_pop(queue_list_t *queue)
+int queue_list_pop(queue_list_t *queue)
 {
-    if (queue_list_is_empty(queue))
-    {
-        printf("Очередь пуста!\n\n");
-        return;
-    }
-
     list_node_t *temp = queue->head;
     int value = temp->data;
     queue->head = queue->head->next;
@@ -49,7 +42,7 @@ void queue_list_pop(queue_list_t *queue)
         queue->tail = NULL;  // Если очередь стала пустой
 
     free(temp);
-    printf("Элемент %d удалён из очереди.\n\n", value);
+    return value;
 }
 
 static void print_reverse(list_node_t *node)
@@ -78,4 +71,19 @@ void queue_list_free(queue_list_t *queue)
 {
     while (!queue_list_is_empty(queue))
         queue_list_pop(queue);
+}
+
+size_t queue_list_memory(queue_list_t *q)
+{
+    size_t memory = sizeof(q->head) + sizeof(q->tail);  // Память на указатели головы и хвоста
+    list_node_t *current = q->head;
+
+    // Считаем память, занимаемую каждым узлом списка
+    while (current)
+    {
+        memory += sizeof(list_node_t);  // Каждый узел занимает память под data и next
+        current = current->next;
+    }
+
+    return memory;
 }
