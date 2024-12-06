@@ -236,6 +236,16 @@ void sd_array(int n, int interval, times_t t1, times_t t2, times_t t3, times_t t
             reqshow = reqout1;
             // printf("Applications processed of queue type 1: \t %d\n", reqout1);
             printf("Обработано заявок 1го типа: %d\n", reqout1);
+            if (queue1.sum_len <= 0)
+            {
+                puts("\nПереполение суммы времени выполнения заявок первой очереди!\n");
+                return;
+            }
+            if (queue2.sum_len <= 0)
+            {
+                puts("\nПереполение суммы времени выполнения заявок второй очереди!\n");
+                return;
+            }
             len_swow(&queue1);
             len_swow(&queue2);
             printf("\n");
