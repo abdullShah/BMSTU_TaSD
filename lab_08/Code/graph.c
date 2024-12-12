@@ -121,7 +121,7 @@ void graphExportToDot(FILE *f, graph_t graph, int n)
         {
             if (graph[i][j] != INF && graph[i][j] != 0)
             {
-                fprintf(f, "    %d -> %d [label=\"%d\"];\n", i + 1, j + 1, graph[i][j]);
+                fprintf(f, "    %d -> %d [label=\"%d\"];\n", i, j, graph[i][j]);
             }
         }
     }

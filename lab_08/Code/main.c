@@ -123,6 +123,17 @@ int main(int argc, char **argv)
                 }
 
                 printf("\nГород с минимальной суммой расстояний: %d\n\n", optimalCity);
+
+                printf("Матрица расстояний:\n");
+                for (int i = 0; i < n; i++)
+                {
+                    printf("Город %d\n", i);
+                    for (int j = 0; j < n; j++)
+                        printf("%d ", dist[i][j]);
+
+                    printf("\n");
+                }
+                printf("\n");
                 break;
             default:
                 puts("Нет такой команды! Повторите попытку\n\n");
